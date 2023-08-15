@@ -3,19 +3,20 @@ import axios from 'axios'
 
 const App = () => {
 
-  const [ contries, setCountries ] = useState([])
+  const [ countries, setCountries ] = useState([])
 
   useEffect(() => {
     const getData = async () => {
       try {
         const { data } = await axios.get('https://restcountries.com/v2/all')
-        console.log('data ->', data)
+        console.log('countries ->', countries)
+        setCountries(data)
       } catch (error) {
         console.log(error)
       }
     }
     getData()
-  })
+  }, []) // empty array so that useEffect only triggers on 1st render
 
   return (
     <div className="container">
