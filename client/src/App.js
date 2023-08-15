@@ -1,16 +1,28 @@
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const App = () => {
+
+  const [ contries, setCountries ] = useState([])
+
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios.get('/api/products/') // * <-- replace with your endpoint
-      console.log(data)
+      try {
+        const { data } = await axios.get('https://restcountries.com/v2/all')
+        console.log('data ->', data)
+      } catch (error) {
+        console.log(error)
+      }
     }
     getData()
   })
 
-  return <h1>Hello World</h1>
+  return (
+    <div className="container">
+      {/* Filters */}
+      {/* Countries */}
+    </div>
+  )
 }
 
 export default App
