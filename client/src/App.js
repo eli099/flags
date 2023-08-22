@@ -20,15 +20,23 @@ const App = () => {
 
   return (
     <div className="container">
+      <h1>Country Flags</h1>
       {/* Filters */}
       {/* Countries */}
       <div className="country-container">
-        {countries.map((country, index) => {
+        {countries.map(country => {
           const { ccn3, name, flags } = country
-          console.log('ccn3 ->', ccn3, 'name ->', name, 'name.nativeName ->', name.nativeName, 'flags.png ->', flags.png)
+          // console.log('ccn3 ->', ccn3, 'name ->', name, 'name.nativeName type->', typeof name.nativeName, 'flags.png ->', flags.png)
+          // console.log('name.nativeName type->', typeof name.nativeName)
           return (
-            <div className="country" key={index}>
-
+            <div className="country" key={ccn3}>
+              <div className="card-header">
+                <h3>{name.common}</h3>
+                <h4>({name.official})</h4>
+              </div>
+              <div className="card-image">
+                <img src={flags.png} alt="Country's Flag" />
+              </div>
             </div>
           )
         })}
