@@ -10,6 +10,7 @@ const App = () => {
       try {
         const { data } = await axios.get('https://restcountries.com/v3.1/all')
         console.log('countries ->', countries)
+        // console.log('working?')
         setCountries(data)
       } catch (error) {
         console.log(error)
@@ -35,7 +36,7 @@ const App = () => {
                 <h4>({name.official})</h4>
               </div>
               <div className="card-image">
-                <img src={flags.png} alt="Country's Flag" />
+                <img src={flags.png} alt={name.common} />
               </div>
             </div>
           )
