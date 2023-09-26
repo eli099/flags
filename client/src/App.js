@@ -3,6 +3,7 @@ import axios from 'axios'
 
 // Components
 import CountryList from './components /CountryList'
+import Filters from './components /Filters'
 
 const App = () => {
 
@@ -67,17 +68,7 @@ const App = () => {
     <div className="container">
       <h1>Country Flags</h1>
       {/* Filters */}
-      <div className="filter-container">
-        {/* Regional Dropdown */}
-        <select name="region" value={filters.region} onChange={handleChange}>
-          <option value="All">All</option>
-          <option value="Africa">Africa</option>
-          {/* Loop through regionList */}
-          {regions.map(region => <option value={region} key={region}>{region}</option>)}
-        </select>
-        {/* Search Field */}
-        <input type="text" name="searchTerm" value={filters.searchTerm} onChange={handleChange}/>
-      </div>
+      <Filters filters={filters} regions={regions} handleChange={handleChange}/>
       {/* Countries */}
       <CountryList countries={countries} filteredCountries={filteredCountries} />
     </div>
