@@ -8,7 +8,9 @@ const App = () => {
 
   // ? State
   const [countries, setCountries] = useState([])
+  const [ filteredCountries, setFilteredCountries ] = useState([])
   const [regions, setRegions] = useState([])
+
   const [filters, setFilters] = useState({
     region: 'All',
     searchTerm: '',
@@ -35,7 +37,7 @@ const App = () => {
     setFilters({ ...filters, [e.target.name]: e.target.value })
   }
 
-  // ? useEffect that cerates regional dropdown options
+  // ? useEffect that creates regional dropdown options
   useEffect(() => {
     // Checking there are countries to loop thorugh in the first place
     // On initial page load, countries will be empty, so no need to create a list
@@ -45,6 +47,21 @@ const App = () => {
       setRegions(regionalList)
     }
   }, [countries])
+
+  // ? useEffect that filters the countries and adds them as a filteredCountries state
+  useEffect(() => {
+    // Only filter countries if there are countries to filter
+    if (countries.length) {
+      // Generate search term
+      const regexSearch = new RegExp(filters.searchTerm, 'i')
+      // Filter though countries and add matching countries to filteredCountries state
+      const filtered = countries.filter(country => {
+        return regexSearch.test(country.name.common) && (country.region === filters.region || filters.region === 'All')
+      })
+      setFilteredCountries(filtered)
+    }
+
+  }, [filters, countries])
 
   return (
     <div className="container">
@@ -62,7 +79,7 @@ const App = () => {
         <input type="text" name="searchTerm" value={filters.searchTerm} onChange={handleChange}/>
       </div>
       {/* Countries */}
-      <CountryList countries={countries} />
+      <CountryList countries={countries} filteredCountries={filteredCountries} />
     </div>
   )
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const CountryList = ({ countries }) => {
+const CountryList = ({ countries, filteredCountries }) => {
   return (
     <div className="country-container">
-      {countries.map(country => {
+      {(filteredCountries.length ? filteredCountries : countries).map(country => {
         const { ccn3, name, flags } = country
         // console.log('ccn3 ->', ccn3, 'name ->', name, 'name.nativeName type->', typeof name.nativeName, 'flags.png ->', flags.png)
         // console.log('name.nativeName type->', typeof name.nativeName)
